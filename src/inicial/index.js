@@ -11,16 +11,20 @@ import axios from 'axios';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    background: 'linear-gradient(45deg, #b100e0 30%, #e37aff 90%)',    
+    background: 'linear-gradient(45deg, #40E0D0 30%, #7FFFD4 90%)',    
     button: {
       margin: theme.spacing(1),      
     },
       width: "100%", 
+      color: "#4f40b3",
       
   },
 
   formControl: {
-    minWidth: 130,
+    minWidth: 170,    
+  },
+  formControlPassageiro: {
+    minWidth: 170,
     
   }
 }));
@@ -71,7 +75,7 @@ export const Inicio = (props) => {
   return (
     <div className={classes.root}>
     <Container maxWidth="sm">
-     
+    <h1>{"Aeroporto API"}</h1>
       <Grid container spacing={3}>
           <Grid item xs={12}>
             <FormControl className={classes.formControl}>
@@ -109,7 +113,7 @@ export const Inicio = (props) => {
         </Grid>
 
   
-       <Grid container spacing={1}>
+       <Grid container spacing={2}>
           <Grid item xs={4}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
@@ -149,7 +153,7 @@ export const Inicio = (props) => {
           </Grid>
         </Grid>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           <Grid item xs={4}>
             <TextField
               id="qtdPassageiros"
@@ -160,8 +164,8 @@ export const Inicio = (props) => {
               }}
             />
           </Grid>
-          <Grid item xs={8}>
-            <FormControl className={classes.formControl}>
+          <Grid item xs={4}>
+            <FormControl className={classes.formControlPassageiro}>
               <InputLabel id="classe">Classe</InputLabel>
               <Select
                 label="Classe"
