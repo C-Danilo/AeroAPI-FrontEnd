@@ -1,10 +1,11 @@
 import 'date-fns';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, FormControl, InputLabel, Select, MenuItem, Grid, TextField, Button,} from "@material-ui/core";
 import DateFnsUtils from '@date-io/date-fns';
 import {  MuiPickersUtilsProvider, KeyboardDatePicker,} from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from '@material-ui/icons/Search';
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -14,12 +15,12 @@ const useStyles = makeStyles((theme) => ({
     button: {
       margin: theme.spacing(1),      
     },
-      maxWidth:'sm', 
-    
+      width: "100%", 
+      
   },
 
   formControl: {
-    minWidth: 120,
+    minWidth: 130,
     
   }
 }));
@@ -30,8 +31,13 @@ export const Inicio = (props) => {
   const [destino, setDestino] = useState("");
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const [classe, setClasse] = useState("");
+  const [locais, setLocais] = useState([]);
 
- 
+  useEffect(()=> {
+    //recebe a URL da api como parametro
+      axios.get('https://localhost:44399/api/Local')
+      .then(resultado => setLocais(resultado.data))
+  }, [] );
 
   const changeOrigem = (e) => {
     setOrigem(e.target.value);
@@ -49,14 +55,12 @@ export const Inicio = (props) => {
     setClasse(e.target.value);
   };
 
-  
-
-  const locais = [
+  /*const locais = [
     { id: 1, nome: "Aeroporto de Guarulhos - SP" },
     { id: 2, nome: "Aeroporto de Divinópolis - MG" },
     { id: 3, nome: "Aeroporto Aeroclube do Espirito Santo - ES" },
     { id: 4, nome: "Aeroporto de Brasilia" },
-  ];
+  ];*/
   
   const vooClasses = [
     { id: 1, nome: "Econômica" },
