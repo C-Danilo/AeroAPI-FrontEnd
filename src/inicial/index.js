@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
   formControl: {
     minWidth: "192px",
-  },
+  }, 
 
   IdaVolta:{
     marginLeft:"9%",
@@ -50,8 +50,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   passageiros:{
-    marginLeft:"8%",
-    width:"100%",
+    marginLeft:"9%",
+    width:"98%",  
    },
 
   tittle:{
@@ -66,8 +66,11 @@ export const Inicio = (props) => {
   const [destino, setDestino] = useState("");  
   const [classe, setClasse] = useState("");
   const [locais, setLocais] = useState([]);
+  
 
- 
+  
+   
+  
   useEffect(() => {
     //recebe a URL da api como parametro
     axios.get('https://localhost:44399/api/Local')
@@ -145,8 +148,8 @@ export const Inicio = (props) => {
           <Grid item xs={4.5}>
             <form className={classes.datas} noValidate>
               <TextField
-                id="date"
-                label="Data Ida"
+                id="dataIda"
+                label="DataIda"
                 type="date"
                 defaultValue="" 
                 className={classes.textField}              
@@ -162,8 +165,8 @@ export const Inicio = (props) => {
           <Grid item xs={4.5}>
           <form className={classes.datas} noValidate>
               <TextField
-                id="date"
-                label="Data Volta"
+                id="dataVolta"
+                label="DataVolta"
                 type="date"
                 defaultValue="" 
                 className={classes.textField}              
@@ -205,7 +208,12 @@ export const Inicio = (props) => {
 
         <Grid className={classes.button} container spacing={5}>
           <Grid item xs={3}>
-            <Button variant="contained" color="primary" className={classes.button} endIcon={<SearchIcon />}>
+            <Button  onClick={  useEffect(() => {
+      
+                              axios.get('https://localhost:44399/api/Voo/FiltroVoos?DataInicial=dataIda&DataFinal=dataVolta')
+                              .then(resultado => setLocais(resultado.data))// status 200 ok
+                              .catch(erro => console.log(erro) ) //status 500 ou 400.
+                          }, [])} variant="contained" color="primary" className={classes.button} endIcon={<SearchIcon />}>
               Buscar
             </Button>
           </Grid>
